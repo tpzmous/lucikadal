@@ -1,0 +1,29 @@
+START_SLOT = 1
+-- jangan di ubah-------------------------------------------------
+if Nuron ~= nil then
+    getBot = Nuron
+end
+
+if getBot().status ~= 1 then
+    getBot().auto_reconnect = false
+    return
+end
+LIST_BOT = {}
+SLOT = 0
+INDEX_SLOT = 0
+for _, bot_raw in pairs(getBots()) do
+    table.insert(LIST_BOT, bot_raw.name)
+end
+
+for idx, botlist in pairs(LIST_BOT) do
+    local name_bot = getBot().name
+    if name_bot:upper() == botlist:upper() then
+        SLOT = idx - 1 + START_SLOT
+        INDEX_SLOT = idx
+        break
+    end
+end
+
+if SLOT == 0 then
+    return
+end
